@@ -16,4 +16,4 @@ class Solution(object):
             elif sum < target:
                 start += 1
             else:
-                return [start + 1, end - 1] 
+                return [start + 1, end + 1] 
