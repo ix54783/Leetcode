@@ -1,0 +1,27 @@
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        direct = [[1,0], [-1,0], [0,1],[0,-1]]
+        clevel = []
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j]:
+                    clevel.append([i,j])
+        time = 0
+        while clevel:
+            next_level = []
+            for org in clevel:
+                grid[org[0]][org[1]] = 0
+                for d in direct:
+                    x, y = org[0] + d[0], org[1] + d[1]
+                    if x >= 0 and x < m and y >= 0 and y < n and grid[x][y] == 1:
+                        next_level.append([x,y])
+                        grid[x][y] = 2
+            if next_level: time+=1
+            clevel = next_level
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    return -1 
+        return time    
